@@ -14,6 +14,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Table(
         name = "usert",
         uniqueConstraints = {

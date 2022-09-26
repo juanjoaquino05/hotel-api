@@ -16,6 +16,7 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @AllArgsConstructor
 @Entity(name = "Room")
 @Table(name = "room")
+@ToString
 public class Room {
 
     @Id
