@@ -15,17 +15,20 @@ import com.alten.hotel_api.response.CreateReservationResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ReservationService {
-//    private Logger log =
-Logger logger = LoggerFactory.getLogger(ReservationService.class);
+    //    private Logger log =
+    Logger logger = LoggerFactory.getLogger(ReservationService.class);
     private ReservationRepository reservationRepository;
     private ReservationValidator reservationValidator;
     private UserService userService;
@@ -50,19 +53,57 @@ Logger logger = LoggerFactory.getLogger(ReservationService.class);
 
         Reservation newReservation = ReservationConverter.convertCreateRequest(request, room, user);
 
-        if(reservedBetweenDates(room, newReservation)) throw new ReservedDateException(ErrorMessages.ROOM_ALREADY_RESERVE);
+        if(reservedBetweenDates(newReservation, false)) throw new ReservedDateException(ErrorMessages.ROOM_ALREADY_RESERVE);
 
         newReservation = reservationRepository.save(newReservation);
 
         return ReservationConverter.convertReservationToResponse(newReservation);
     }
 
-    private Boolean reservedBetweenDates(Room room, Reservation reservation) {
+    public ResponseEntity<CreateReservationResponse> modifyReservation(Long userId, Long reservationId, Reservation reservationData) throws Exception {
+        User user = userService.getUser(userId);
+
+        Optional<Reservation> reservation = reservationRepository.findById(reservationId);
+
+        if(!reservation.isPresent()) throw new ResourceNotFoundException("Reservation");
+        Reservation toUpdate = reservation.get();
+
+        ReservationConverter.updateReservationData(toUpdate, reservationData);
+
+        CreateReservationRequest fakeRequest = ReservationConverter.convertReservationToCreateRequest(toUpdate);
+        reservationValidator.validateCreateRequest(fakeRequest);
+
+        if(reservedBetweenDates(toUpdate, true)) throw new ReservedDateException(ErrorMessages.ROOM_ALREADY_RESERVE);
+
+        toUpdate = reservationRepository.save(toUpdate);
+
+        return ResponseEntity.ok()
+                .body(ReservationConverter.convertReservationToResponse(toUpdate));
+
+    }
+    public void cancelReservation(Long userId, Long reservationId) {
+        User user = userService.getUser(userId);
+
+        Optional<Reservation> reservation = reservationRepository.findById(reservationId);
+
+        if(!reservation.isPresent()) return;
+
+        Reservation toUpdate = reservation.get();
+        toUpdate.setIsCancelled(true);
+        toUpdate.setLastUpdatedDate(LocalDateTime.now());
+
+        reservationRepository.save(toUpdate);
+
+    }
+
+    private Boolean reservedBetweenDates(Reservation reservation, Boolean excludeReservation) {
         List<Reservation> reservations =
                 reservationRepository.findAllByRoomIdAndIsCancelledAndStartDateBetweenOrEndDateBetween(
-                        room.getId(), false, reservation.getStartDate(),
+                        reservation.getRoom().getId(), false, reservation.getStartDate(),
                         reservation.getEndDate(),
                         reservation.getStartDate(), reservation.getEndDate());
+
+        if(excludeReservation && reservations.size() == 1) return false;
 
         return (reservations.size() > 0);
     }

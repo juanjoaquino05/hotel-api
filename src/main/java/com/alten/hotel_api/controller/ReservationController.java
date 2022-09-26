@@ -38,5 +38,17 @@ public class ReservationController {
         return ResponseEntity.ok().body(reservation);
     }
 
+    @PutMapping("/{rid}/user/{id}")
+    public ResponseEntity<CreateReservationResponse> replaceEmployee(@PathVariable Long id, @PathVariable Long rid, @RequestBody Reservation reservation) throws Exception {
 
+        return service.modifyReservation(id, rid, reservation);
+
+    }
+
+    @DeleteMapping("/{rid}/user/{id}")
+    public ResponseEntity cancelReservation(@PathVariable Long id, @PathVariable Long rid){
+        service.cancelReservation(id, rid);
+
+        return ResponseEntity.ok().body(null);
+    }
 }
