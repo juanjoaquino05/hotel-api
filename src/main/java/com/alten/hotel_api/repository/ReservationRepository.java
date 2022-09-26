@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
     List<Reservation> findAllByRoomIdAndStartDateBetween(Long room, LocalDateTime startStartDate, LocalDateTime endStartDate);
+    List<Reservation> findAllByRoomIdAndStartDateBetweenOrEndDateBetween(
+            Long room, LocalDateTime startStartDate, LocalDateTime endStartDate, LocalDateTime startEndDate, LocalDateTime endEndDate);
 }
