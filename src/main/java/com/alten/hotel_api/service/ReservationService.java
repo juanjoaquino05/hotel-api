@@ -59,8 +59,9 @@ Logger logger = LoggerFactory.getLogger(ReservationService.class);
 
     private Boolean reservedBetweenDates(Room room, Reservation reservation) {
         List<Reservation> reservations =
-                reservationRepository.findAllByRoomIdAndStartDateBetweenOrEndDateBetween(
-                        room.getId(), reservation.getStartDate(), reservation.getEndDate(),
+                reservationRepository.findAllByRoomIdAndIsCancelledAndStartDateBetweenOrEndDateBetween(
+                        room.getId(), false, reservation.getStartDate(),
+                        reservation.getEndDate(),
                         reservation.getStartDate(), reservation.getEndDate());
 
         return (reservations.size() > 0);

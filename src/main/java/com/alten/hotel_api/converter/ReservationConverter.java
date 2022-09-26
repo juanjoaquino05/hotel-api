@@ -26,6 +26,7 @@ public class ReservationConverter {
 
         reservation.setStartDate(start.atStartOfDay());
         reservation.setEndDate(end.atTime(23, 59, 59));
+        reservation.setIsCancelled(false);
 
         return reservation;
     }
