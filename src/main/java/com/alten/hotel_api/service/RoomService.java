@@ -46,6 +46,8 @@ public class RoomService {
 
         reservations.forEach(reservation -> {
             List<LocalDate> dates = DatesUtil.getDatesBetween(reservation.getStartDate().toLocalDate(), reservation.getEndDate().toLocalDate());
+            dates.add(reservation.getEndDate().toLocalDate());
+
             datesToRemove.addAll(dates);
         });
 
