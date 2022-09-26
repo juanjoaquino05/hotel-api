@@ -84,4 +84,11 @@ public class Reservation {
             columnDefinition = "TIMESTAMP WITHOUT TIME ZONE"
     )
     private LocalDateTime createdDate;
+
+    @Column(
+            name = "last_updated_date",
+            nullable = false,
+            columnDefinition = "TIMESTAMP WITHOUT TIME ZONE"
+    )
+    private LocalDateTime lastUpdatedDate;
 }

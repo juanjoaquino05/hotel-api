@@ -1,13 +1,17 @@
 package com.alten.hotel_api.service;
 
+import com.alten.hotel_api.converter.ReservationConverter;
 import com.alten.hotel_api.exception.ResourceNotFoundException;
+import com.alten.hotel_api.helper.ReservationValidator;
 import com.alten.hotel_api.model.Reservation;
 import com.alten.hotel_api.model.User;
 import com.alten.hotel_api.repository.ReservationRepository;
 import com.alten.hotel_api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -38,6 +42,7 @@ public class UserService {
 
         Reservation toUpdate = reservation.get();
         toUpdate.setIsCancelled(true);
+        toUpdate.setLastUpdatedDate(LocalDateTime.now());
 
         reservationRepository.save(toUpdate);
 
