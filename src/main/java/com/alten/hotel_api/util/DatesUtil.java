@@ -1,6 +1,8 @@
 package com.alten.hotel_api.util;
 
 import java.time.LocalDate;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -10,5 +12,13 @@ public class DatesUtil {
 
         return startDate.datesUntil(endDate)
                 .collect(Collectors.toList());
+    }
+
+    public static Integer getDaysDiffBetween(
+            LocalDate startDate, LocalDate endDate) {
+
+        Long days = ChronoUnit.DAYS.between(startDate, endDate);
+
+        return days.intValue();
     }
 }
