@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -78,6 +79,20 @@ public class ReservationService {
 
         return ResponseEntity.ok()
                 .body(ReservationConverter.convertReservationToResponse(toUpdate));
+
+    }
+    public void cancelReservation(Long userId, Long reservationId) {
+        User user = userService.getUser(userId);
+
+        Optional<Reservation> reservation = reservationRepository.findById(reservationId);
+
+        if(!reservation.isPresent()) return;
+
+        Reservation toUpdate = reservation.get();
+        toUpdate.setIsCancelled(true);
+        toUpdate.setLastUpdatedDate(LocalDateTime.now());
+
+        reservationRepository.save(toUpdate);
 
     }
 

@@ -11,18 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
 public class UserService {
     private UserRepository userRepository;
-    private ReservationRepository reservationRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository, ReservationRepository reservationRepository) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.reservationRepository = reservationRepository;
     }
 
 
@@ -31,20 +28,5 @@ public class UserService {
         if(!user.isPresent()) throw new ResourceNotFoundException("User");
 
         return user.get();
-    }
-
-    public void cancelReservation(Long userId, Long reservationId) {
-        User user = getUser(userId);
-
-        Optional<Reservation> reservation = reservationRepository.findById(reservationId);
-
-        if(!reservation.isPresent()) return;
-
-        Reservation toUpdate = reservation.get();
-        toUpdate.setIsCancelled(true);
-        toUpdate.setLastUpdatedDate(LocalDateTime.now());
-
-        reservationRepository.save(toUpdate);
-
     }
 }
