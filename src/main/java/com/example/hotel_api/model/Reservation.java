@@ -1,7 +1,6 @@
 package com.example.hotel_api.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -10,8 +9,10 @@ import java.time.LocalDateTime;
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity(name = "Reservation")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(
     name = "reservation",
     uniqueConstraints = {
