@@ -12,7 +12,16 @@ import static javax.persistence.GenerationType.SEQUENCE;
 @Entity(name = "Reservation")
 @Data
 @NoArgsConstructor
-@Table(name = "reservation")
+@Table(
+    name = "reservation",
+    uniqueConstraints = {
+        @UniqueConstraint(
+            name = "UniqueReservationPerRoomAndStartDate",
+            columnNames = { "start_date", "room_id" }
+        )
+    }
+)
+
 public class Reservation {
 
     @Id
@@ -65,4 +74,11 @@ public class Reservation {
         columnDefinition = "TIMESTAMP WITHOUT TIME ZONE"
     )
     private LocalDateTime endDate;
+
+    @Column(
+            name = "created_date",
+            nullable = false,
+            columnDefinition = "TIMESTAMP WITHOUT TIME ZONE"
+    )
+    private LocalDateTime createdDate;
 }

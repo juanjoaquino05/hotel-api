@@ -23,13 +23,13 @@ public class Hotel {
 
     @Id
     @SequenceGenerator(
-        name = "student_sequence",
-        sequenceName = "student_sequence",
+        name = "hotel_sequence",
+        sequenceName = "hotel_sequence",
         allocationSize = 1
     )
     @GeneratedValue(
         strategy = SEQUENCE,
-        generator = "student_sequence"
+        generator = "hotel_sequence"
     )
     @Column(
         name = "id"
@@ -51,4 +51,14 @@ public class Hotel {
     )
     private List<Room> rooms = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(
+            name = "country_id",
+            nullable = false,
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(
+                    name = "country_hotel_fk"
+            )
+    )
+    private Country country;
 }
