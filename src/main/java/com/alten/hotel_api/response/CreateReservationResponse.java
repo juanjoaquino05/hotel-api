@@ -1,6 +1,5 @@
 package com.alten.hotel_api.response;
 
-import com.alten.hotel_api.model.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

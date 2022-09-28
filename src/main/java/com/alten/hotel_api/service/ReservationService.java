@@ -12,8 +12,6 @@ import com.alten.hotel_api.model.Reservation;
 import com.alten.hotel_api.repository.RoomRepository;
 import com.alten.hotel_api.request.CreateReservationRequest;
 import com.alten.hotel_api.response.CreateReservationResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -27,12 +25,10 @@ import java.util.Optional;
 
 @Service
 public class ReservationService {
-    //    private Logger log =
-    Logger logger = LoggerFactory.getLogger(ReservationService.class);
-    private ReservationRepository reservationRepository;
-    private ReservationValidator reservationValidator;
-    private UserService userService;
-    private RoomRepository roomRepository;
+    private final ReservationRepository reservationRepository;
+    private final ReservationValidator reservationValidator;
+    private final UserService userService;
+    private final RoomRepository roomRepository;
 
     @Autowired
     public ReservationService(ReservationRepository reservationRepository, ReservationValidator reservationValidator, UserService userService, RoomRepository roomRepository) {

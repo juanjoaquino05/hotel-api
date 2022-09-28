@@ -1,13 +1,8 @@
 package com.alten.hotel_api.service;
 
 import com.alten.hotel_api.constant.Reservations;
-import com.alten.hotel_api.exception.ResourceNotFoundException;
-import com.alten.hotel_api.model.Hotel;
 import com.alten.hotel_api.model.Room;
 import com.alten.hotel_api.repository.RoomRepository;
-import com.alten.hotel_api.util.DatesUtil;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,7 +18,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -39,11 +33,6 @@ public class RoomServiceTest {
 
     @Mock
     private RoomRepository roomRepository;
-
-    @BeforeAll
-    public void setUp(){
-
-    }
 
     @Test
     public void checkAvailabilityForNewRoom_ShouldReturnListOfAvailableDates() {
