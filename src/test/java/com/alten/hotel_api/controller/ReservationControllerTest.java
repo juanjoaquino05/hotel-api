@@ -6,8 +6,6 @@ import com.alten.hotel_api.model.User;
 import com.alten.hotel_api.request.CreateReservationRequest;
 import com.alten.hotel_api.response.CreateReservationResponse;
 import com.alten.hotel_api.service.ReservationService;
-import com.alten.hotel_api.service.RoomService;
-import com.alten.hotel_api.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 import static com.alten.hotel_api.constant.Reservations.DATE_FORMAT_PATTERN;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -29,8 +26,6 @@ import static org.mockito.Mockito.when;
 public class ReservationControllerTest {
     private ReservationController controller;
 
-    @Mock
-    private UserService userService;
     @Mock
     private ReservationService reservationService;
 

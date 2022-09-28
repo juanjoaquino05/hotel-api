@@ -1,7 +1,6 @@
 package com.alten.hotel_api.model;
 
 import lombok.*;
-import org.hibernate.type.descriptor.sql.TinyIntTypeDescriptor;
 
 import javax.persistence.*;
 

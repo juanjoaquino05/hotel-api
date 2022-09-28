@@ -1,0 +1,140 @@
+{
+	"info": {
+		"_postman_id": "5dfa2fd1-bbee-4917-bd35-f9a0903ac795",
+		"name": "Alten Hotel API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3873601"
+	},
+	"item": [
+		{
+			"name": "Make Reservation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "room",
+						"value": "1",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"room\" : 1,\n    \"startDate\" : \"2022-10-04\",\n    \"endDate\" : \"2022-10-05\",\n    \"user\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}:{{port}}/api/reservations",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"reservations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modify Reservation",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "room",
+						"value": "1",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"room_id\" : 1,\n    \"startDate\" : \"2022-10-01T00:00:00\",\n    \"endDate\" : \"2022-10-02T23:59:59\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}:{{port}}/api/reservations/13/user/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"reservations",
+						"13",
+						"user",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cancel Reservation",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "room",
+						"value": "1",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}:{{port}}/api/reservations/13/user/1",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"reservations",
+						"13",
+						"user",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Availability",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "room",
+						"value": "1",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}:{{port}}/api/rooms/1/availability",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"api",
+						"rooms",
+						"1",
+						"availability"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
