@@ -2,7 +2,6 @@ package com.alten.hotel_api.service;
 
 import com.alten.hotel_api.model.User;
 import com.alten.hotel_api.repository.UserRepository;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,11 +24,6 @@ public class UserServiceTest {
 
     @Mock
     private UserRepository userRepository;
-
-    @BeforeAll
-    public void setUp(){
-
-    }
 
     @Test
     public void getUserWithExistingElement_ShouldReturnUser() {

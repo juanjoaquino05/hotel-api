@@ -18,8 +18,8 @@ import java.util.Set;
 @Service
 public class RoomService {
 
-    private RoomRepository roomRepository;
-    private ReservationService reservationService;
+    private final RoomRepository roomRepository;
+    private final ReservationService reservationService;
 
     @Autowired
     public RoomService(RoomRepository roomRepository, ReservationService reservationService) {
@@ -51,9 +51,7 @@ public class RoomService {
             datesToRemove.addAll(dates);
         });
 
-        datesToRemove.forEach(date -> {
-            availability.remove(date);
-        });
+        datesToRemove.forEach(availability::remove);
     }
 
     public Room getRoom(Long id) {
