@@ -47,11 +47,9 @@ public class ReservationValidator {
         } catch (Exception e){
             throw new InvalidDateFormatException("endDate");
         }
-
         // Can not set an end date earlier than start date
         if(startDate.isAfter(endDate))
             throw new InvalidDateException(ErrorMessages.END_DATE_BEFORE_START_DATE);
-
         // Can not reserve more than 3 days
         if(DatesUtil.getDaysDiffBetween(startDate, endDate) >= MAX_RESERVATION_DAYS)
             throw new InvalidDateException(ErrorMessages.THREE_DAY_LIMIT);
