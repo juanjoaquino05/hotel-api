@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.alten</groupId>
 	<artifactId>hotel-api</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<name>hotel-api</name>
 	<description>Hotel API developed for Alten test</description>
 	<properties>

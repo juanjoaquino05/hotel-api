@@ -19,10 +19,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ExtendWith(MockitoExtension.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class ReservationConverterTest {
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT_PATTERN);
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT_PATTERN);
 
     @Test
-    public void convertValidReservation_ShouldReturnValidResponse() throws Exception {
+    public void convertValidReservation_ShouldReturnValidResponse() {
         // given
         Reservation reservation = createValidReservation();
 
